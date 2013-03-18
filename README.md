@@ -9,9 +9,13 @@ Google Charts is a simple API that allows you to not only visualize data on webs
 Instructions: 5 Easy Steps
 ==========
 
+Choose your chart
+=
+The first step to using Google Charts is selecting your choice of chart. You can view the [gallery](https://developers.google.com/chart/interactive/docs/gallery) on Google's documentation. You need to select your graph carefully depending on the data you have and what you are trying to convey to your user.
+
 Load the libraries
 =
-To start using Google Charts, all you need to do is add an external Javascript file, and add a few lines of code. Add the following lines inside the HEAD tag of your HTML page:
+To start using your chart with Google Charts, all you need to do is add an external Javascript file, and add a few lines of code. Add the following lines inside the HEAD tag of your HTML page:
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
@@ -23,11 +27,8 @@ To start using Google Charts, all you need to do is add an external Javascript f
       }
     </script>
 
-to the head of your HTML file. This is all you have to do to begin playing with Google Charts. It's magic! Once all of the APIs are loaded, Google will execute drawChart, where you can create the chart, add data and options, and finally display it.
+This is all you have to do to begin playing with Google Charts. It's magic! Once all of the APIs are loaded, Google will execute drawChart, where you can create the chart with your data and options you will later specify.
 
-Choose your chart
-=
-TODO
 
 Prepare your data
 =

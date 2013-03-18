@@ -25,10 +25,14 @@ To start using Google Charts, all you need to do is add an external Javascript f
 
 to the head of your HTML file. This is all you have to do to begin playing with Google Charts. It's magic! Once all of the APIs are loaded, Google will execute drawChart, where you can create the chart, add data and options, and finally display it.
 
+Choose your chart
+=
+TODO
+
 Prepare your data
 =
+Google provides many ways of providing your new Chart with the data it needs and more importantly in the format it requires. In the end, all data must be in the <code>google.visualization.DataTable</code> format. This DataTable type is really just a fancy two-dimensional table which has a column type/label/(optional)id and the rows which represent the data. Your data must be formatted correctly for your Chart of choice. You can read the documentation specific for your chart to read on how you must format the data.
 
-3. Choose your chart
 4. Add your options
 4. Add your chart
 5. Make it interactive (optional)

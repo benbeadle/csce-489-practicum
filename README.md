@@ -22,10 +22,12 @@ To start using Google Charts, all you need to do is add an external Javascript f
         //Code to create/display the chart goes here
       }
     </script>
-to the head of your HTML file.
 
-Here's an example HTML file to load the Google Charts library:
-2. Prepare your data
+to the head of your HTML file. This is all you have to do to begin playing with Google Charts. It's magic! Once all of the APIs are loaded, Google will execute drawChart, where you can create the chart, add data and options, and finally display it.
+
+Prepare your data
+=
+
 3. Choose your chart
 4. Add your options
 4. Add your chart

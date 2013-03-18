@@ -11,10 +11,33 @@ Instructions: 5 Easy Steps
 
 Load the libraries
 =
-To start using Google Charts, all you need to do is add a external Javascript file, and add a few lines of code. Here's an example:
-<code>
+To start using Google Charts, all you need to do is add a external Javascript file, and add a few lines of code. You must load three libraries:
+1. The JSAPI
+2. The Visualization Package
+3. The Chart
 
-</code>
+Here's an example HTML file to load the Google Charts library:
+<blockquote>
+<html>
+  <head>
+  <code>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      //Tell Google to load the Visualization API. Certain Charts have different packages. This example is the Pie Chart
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        //Here is where you will create your chart and display it
+      }
+    </script
+  </code>
+  </head>
+  <body>
+    <!--You must provide the API with a DIV to draw your Chart in. You can provide the width
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
+</blockquote>
 2. Prepare your data
 3. Choose your chart
 4. Add your options

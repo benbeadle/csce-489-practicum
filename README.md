@@ -29,7 +29,7 @@ To start using your chart with Google Charts, all you need to do is add an exter
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        //Code to create/display the chart goes here
+        //Code to create/display the chart goes here (view solution below)
       }
     </script>
 
@@ -42,21 +42,77 @@ Prepare your data
 =
 Google provides many ways of providing your new Chart with the data it needs and more importantly in the format it requires. In the end, all data must be in the <code>google.visualization.DataTable</code> format. This DataTable type is really just a fancy two-dimensional table which has a column type/label/(optional)id and the rows which represent the data. There are X different ways of aquiring and formatting your data:
 
-1. Create a [DataTable or DataView](https://developers.google.com/chart/interactive/docs/datatables_dataviews) object. 
+1. Create a [DataTable or DataView](https://developers.google.com/chart/interactive/docs/datatables_dataviews) object. This can be completed by manually adding columns/rows, creating one from an array, using a JS literal, or sending a datasource query. 
 2. Populate the data [server-side](https://developers.google.com/chart/interactive/docs/php_example). This would include making an ajax call to an api which formats the output accordingly.
 3. [Query a data source](https://developers.google.com/chart/interactive/docs/queries) which follows the Chart Tools Datasource protocol. For example, you can easily query a [Google Docs Spreadsheet](https://developers.google.com/chart/interactive/docs/datatables_dataviews#query) that has data.
 
 Your data must be formatted correctly for your Chart of choice. You should read the documentation specific for your chart to make sure you are following the format accordingly. 
 
-Let's say I have an array of  (array into a DataTable)[https://developers.google.com/chart/interactive/docs/datatables_dataviews#arraytodatatable], the code would look like this:
+Let's say I have an array of Ponies and Statistics and I'd like to turn [into a DataTable](https://developers.google.com/chart/interactive/docs/datatables_dataviews#arraytodatatable). The code would look like this:
 
-    
+    var data = [
+        ["Pony", "Value"],
+        ["Twilight Sparkle", 335.9027976407598],
+        ["Rainbow Dash", 214.0516842973825],
+        ["Pinkie Pie", 208.47923663449154],
+        ["Fluttershy",174.49897261904653],
+        ["Rarity", 102.91225114250258],
+        ["Applejack", 84.51268612411526]
+    ]
+    var arrayTable = google.visualization.arrayToDataTable(data, false); //false means the first column is a label column
 
 Customize Your Chart
 =
+So what about the axis titles, the chart title, or customizing the tooltips? Google Charts allows you to [customize a lot](https://developers.google.com/chart/interactive/docs/customizing_charts) to make it look and feel exactly like you want it. Let's say I wanted to change the title and put the legend on the left side for my Pony Statistics Pie Chart. Also, looking at the data above, you can see that the numbers are not in percentages, which would be confusing for the user to manually calculate their percentages. Luckily, with Google Charts, you can easily set all of this in your options:
+    
+    var options = {
+        title: "Pony Statistics",
+        height: 250,
+        width: 250,
+        backgroundColor: "#FAAFBA",
+        chartArea: {
+            width: "100%",
+            height: "100%"
+        },
+        legend: {
+            position: "left",
+            alignment: "center"
+        },
+        pieSliceText: "percentage",
+        pieSliceBorderColor: "#6C2DC7",
+        tooltip: {
+            text: "percentage" //Tell the tooltip to show the percentage
+        }
+    }
+
+As you can see from this simple example, there are a lot of options to set! In fact, while there are options available to all charts, you can check out the available options for your specific chart on the documentation page. Check out the [Pie Chart](https://developers.google.com/chart/interactive/docs/gallery/piechart#Configuration_Options) documentation to see what some of the above settings mean.
+
+Add your chart
+=
+
+Now it's time add your chart to the page and display it for your user. There are two things you need to do,
+1. Make sure you have a div labeled with an id somewhere on your page, like this:
+
+    <body>
+        <div id="pie_chart" /><!-- You can optionally set style like height/width here -->
+    </body>
+
+2. Attach the chart to the page. You need to do this in the drawChart method due to the fact that you have to wait for all of the APIs to load as you can see when you loaded your libraries. The method to draw your chart should look something like this:
+
+    function drawChart() {
+        var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
+        chart.draw(data, options);
+    }
+
+There are many other ways to [draw your chart](https://developers.google.com/chart/interactive/docs/drawing_charts). Each type has advantages and disadvantages, it just depends on how your data is compiled/stored which way might be easiest.
 
 
-4. Add your chart
-5. Make it interactive (optional)
+Make it interactive (optional)
+=
+
+Google Charts allows you to make your chart [interactive](https://developers.google.com/chart/interactive/docs/events). For example, let's say with the Pie Chart above, we want to know when the user clicks on a result to show that specific pony. You can add an event listener to your chart to be notified when the user does so:
+
+    
+
 
 Don't forget the Image Charts API

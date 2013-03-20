@@ -6,6 +6,80 @@ Intro
 Google Charts is a simple API that allows you to not only visualize data on websites, but is extremely simple to use, and automatically provides an interactive environment that allows the user to do more than just view the presentation of data. At the time of this writing, there are 14 different ways (read: graphs) you can display your data. Not only that, but Google provides simple ways of retrieving the data you want displayed from a myriad of sources. There is even an [interactive playground](https://code.google.com/apis/ajax/playground/?type=visualization#pie_chart) Google provides for you to play around with the different types of charts and ways to manipulate the data.
 
 <hr />
+
+Before walking your through the steps, here's a working version of the sample I help you create:
+
+    <html>
+    <head>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+        var data = [
+        ["Pony", "Value"],
+        ["Twilight Sparkle", 335.9027976407598],
+        ["Rainbow Dash", 214.0516842973825],
+        ["Pinkie Pie", 208.47923663449154],
+        ["Fluttershy",174.49897261904653],
+        ["Rarity", 102.91225114250258],
+        ["Applejack", 84.51268612411526]
+        ];
+        
+        //This is defined globally, instead of in drawChart, so other
+        //things can interact with it like the select event.
+        var chart;
+        
+        var options = {
+        title: "Pony Statistics",
+        height: 400,
+        width: 600,
+        backgroundColor: "#FAAFBA",
+        chartArea: {
+        width: "100%",
+        height: "100%"
+        },
+        legend: {
+        position: "left",
+        alignment: "center"
+        },
+        pieSliceText: "percentage",
+        pieSliceBorderColor: "#6C2DC7",
+        tooltip: {
+        text: "percentage" //Tell the tooltip to show the percentage
+        }
+        }
+        
+        //Called when the user selects a slice of the pie.
+        function ponySelected(event) {
+        //Pie Charts can only have one element selected
+        var selection = chart.getSelection()[0]
+        var pony = data[selection.row];
+        
+        document.getElementById("selection").innerHTML = "You selected " +
+        pony[0] + " with a value of " + pony[1];
+        }
+        //Called when the APIs are ready to play
+        function drawChart() {
+        var arrayTable = google.visualization.arrayToDataTable(data, false);//false means first column is a label column 
+        chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
+        chart.draw(arrayTable, options);
+        google.visualization.events.addListener(chart, 'select', ponySelected);
+        }
+        
+        
+        //You must load a certain package depending on the Chart you are using.
+        google.load("visualization", "1", {packages:["corechart"]});
+        google.setOnLoadCallback(drawChart);
+        </script>
+        </head>
+    <body>
+        <div id="pie_chart"></div>
+        <div id="selection"></div>
+    </body>
+    </html>
+
+
+
+
+<hr />
 Instructions: 5 Easy Steps
 ==========
 
@@ -61,6 +135,8 @@ Let's say I have an array of Ponies and Statistics and I'd like to turn [into a 
     ]
     var arrayTable = google.visualization.arrayToDataTable(data, false); //false means the first column is a label column
 
+Do note, that calling the <code>arrayToDataTabe</code> method must be done after the APIs have loaded, aka in the <code>drawChart</code> method you have defined.
+
 Customize Your Chart
 =
 So what about the axis titles, the chart title, or customizing the tooltips? Google Charts allows you to [customize a lot](https://developers.google.com/chart/interactive/docs/customizing_charts) to make it look and feel exactly like you want it. Let's say I wanted to change the title and put the legend on the left side for my Pony Statistics Pie Chart. Also, looking at the data above, you can see that the numbers are not in percentages, which would be confusing for the user to manually calculate their percentages. Luckily, with Google Charts, you can easily set all of this in your options:
@@ -99,9 +175,10 @@ Now it's time add your chart to the page and display it for your user. There are
 
 2. Attach the chart to the page. You need to do this in the drawChart method due to the fact that you have to wait for all of the APIs to load as you can see when you loaded your libraries. The method to draw your chart should look something like this:
 
+    var chart; //Make this global so other methods, like the optional one in the next section can use it!
     function drawChart() {
-        var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
-        chart.draw(data, options);
+        chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
+        chart.draw(arrayTable, options);
     }
 
 There are many other ways to [draw your chart](https://developers.google.com/chart/interactive/docs/drawing_charts). Each type has advantages and disadvantages, it just depends on how your data is compiled/stored which way might be easiest.
@@ -111,8 +188,15 @@ Make it interactive (optional)
 =
 
 Google Charts allows you to make your chart [interactive](https://developers.google.com/chart/interactive/docs/events). For example, let's say with the Pie Chart above, we want to know when the user clicks on a result to show that specific pony. You can add an event listener to your chart to be notified when the user does so:
-
     
+    function ponySelected(event) {
+        var pony = chart.getSelection()
+    }
+    
+    function drawChart() {
+        //Code from previous step
+        google.visualization.events.addListener(chart, 'select', ponySelected);
+    }
 
 
 Don't forget the Image Charts API

@@ -7,20 +7,25 @@ Google Charts is a simple API that allows you to not only visualize data on webs
 
 <hr />
 
-Before walking your through the steps, here's a working version of the sample I help you create:
+Example
+=
+
+To create the following chart:
+
+
 
     <html>
     <head>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript">
         var data = [
-        ["Pony", "Value"],
-        ["Twilight Sparkle", 335.9027976407598],
-        ["Rainbow Dash", 214.0516842973825],
-        ["Pinkie Pie", 208.47923663449154],
-        ["Fluttershy",174.49897261904653],
-        ["Rarity", 102.91225114250258],
-        ["Applejack", 84.51268612411526]
+            ["Pony", "Value"],
+            ["Twilight Sparkle", 335.9027976407598],
+            ["Rainbow Dash", 214.0516842973825],
+            ["Pinkie Pie", 208.47923663449154],
+            ["Fluttershy",174.49897261904653],
+            ["Rarity", 102.91225114250258],
+            ["Applejack", 84.51268612411526]
         ];
         
         //This is defined globally, instead of in drawChart, so other
@@ -28,40 +33,45 @@ Before walking your through the steps, here's a working version of the sample I 
         var chart;
         
         var options = {
-        title: "Pony Statistics",
-        height: 400,
-        width: 600,
-        backgroundColor: "#FAAFBA",
-        chartArea: {
-        width: "100%",
-        height: "100%"
-        },
-        legend: {
-        position: "left",
-        alignment: "center"
-        },
-        pieSliceText: "percentage",
-        pieSliceBorderColor: "#6C2DC7",
-        tooltip: {
-        text: "percentage" //Tell the tooltip to show the percentage
-        }
+            title: "Pony Statistics",
+            height: 400,
+            width: 600,
+            backgroundColor: "#FAAFBA",
+            chartArea: {
+                width: "100%",
+                height: "100%"
+            },
+            legend: {
+                position: "left",
+                alignment: "center"
+            },
+                pieSliceText: "percentage",
+                pieSliceBorderColor: "#6C2DC7",
+            tooltip: {
+                text: "percentage" //Tell the tooltip to show the percentage
+            }
         }
         
         //Called when the user selects a slice of the pie.
         function ponySelected(event) {
-        //Pie Charts can only have one element selected
-        var selection = chart.getSelection()[0]
-        var pony = data[selection.row];
-        
-        document.getElementById("selection").innerHTML = "You selected " +
-        pony[0] + " with a value of " + pony[1];
-        }
+            //Pie Charts can only have one element selected
+            var selection = chart.getSelection()[0]
+            if(!selection) {
+                document.getElementById("selection").innerHTML = "Select a pony to view stats.";
+                return;
+            }
+            
+            var pony = data[selection.row+1];
+            
+            document.getElementById("selection").innerHTML = "You selected " +
+                pony[0] + " with a value of " + pony[1];
+         }
         //Called when the APIs are ready to play
         function drawChart() {
-        var arrayTable = google.visualization.arrayToDataTable(data, false);//false means first column is a label column 
-        chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
-        chart.draw(arrayTable, options);
-        google.visualization.events.addListener(chart, 'select', ponySelected);
+            var arrayTable = google.visualization.arrayToDataTable(data, false);//false means first column is a label column 
+            chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
+            chart.draw(arrayTable, options);
+            google.visualization.events.addListener(chart, 'select', ponySelected);
         }
         
         
@@ -69,7 +79,7 @@ Before walking your through the steps, here's a working version of the sample I 
         google.load("visualization", "1", {packages:["corechart"]});
         google.setOnLoadCallback(drawChart);
         </script>
-        </head>
+    </head>
     <body>
         <div id="pie_chart"></div>
         <div id="selection"></div>

@@ -10,9 +10,11 @@ Google Charts is a simple API that allows you to not only visualize data on webs
 Example
 =
 
-To create the following chart:
+Let's take a look at a working (altered) example, my [Pony Placement Project](http://ponyplacementproject.com) results:
 
+![Screenshot](https://googledrive.com/host/0ByFjNR-5h19FOFBWbnVqLXlBaW8/Pony Placement Project - Google Charts.png)
 
+The code for this looks like this:
 
     <html>
     <head>
@@ -97,11 +99,7 @@ Instructions: 5 Easy Steps
 
 Choose your chart
 =
-The first step to using Google Charts is selecting your choice of chart. You can view the [gallery](https://developers.google.com/chart/interactive/docs/gallery) on Google's documentation. You need to select your graph carefully depending on the data you have and what you are trying to convey to your user. Let's say I want to make a chart that looks like this:
-
-![Screenshot](https://googledrive.com/host/0ByFjNR-5h19FOFBWbnVqLXlBaW8/Pony Placement Project - Google Charts.png)
-
-As you can obviously tell, this is a [Pie Chart](https://developers.google.com/chart/interactive/docs/gallery/piechart).
+The first step to using Google Charts is selecting your choice of chart. You can view the [gallery](https://developers.google.com/chart/interactive/docs/gallery) on Google's documentation. You need to select your graph carefully depending on the data you have and what you are trying to convey to your user. Let's say we want to make the chart like above, the [Pie Chart](https://developers.google.com/chart/interactive/docs/gallery/piechart).
 
 Factoid: Developers have contributed other charts which you can view on the [Additional Charts](https://google-developers.appspot.com/chart/interactive/docs/more_charts.html) page. For example, you can integrate [Google Maps](https://google-developers.appspot.com/chart/interactive/docs/gallery/map) with data.
 
@@ -221,5 +219,4 @@ Google Charts allows you to make your chart [interactive](https://developers.goo
         google.visualization.events.addListener(chart, 'select', ponySelected);
     }
 
-
-Don't forget the Image Charts API
+There are so many ways to allow your users to interact with your charts, you can pretty much do anything you want!

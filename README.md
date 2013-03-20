@@ -55,13 +55,15 @@ To create the following chart:
         //Called when the user selects a slice of the pie.
         function ponySelected(event) {
             //Pie Charts can only have one element selected
-            var selection = chart.getSelection()[0]
-            if(!selection) {
-                document.getElementById("selection").innerHTML = "Select a pony to view stats.";
-                return;
+             var selection = chart.getSelection()
+        
+            //If you click a pony that was already selected, it deselects it
+            if(selection.length == 0) {
+              document.getElementById("selection").innerHTML = "Select a pony to view stats.";
+              return;
             }
             
-            var pony = data[selection.row+1];
+            var pony = data[selection[0].row+1];
             
             document.getElementById("selection").innerHTML = "You selected " +
                 pony[0] + " with a value of " + pony[1];
@@ -200,7 +202,18 @@ Make it interactive (optional)
 Google Charts allows you to make your chart [interactive](https://developers.google.com/chart/interactive/docs/events). For example, let's say with the Pie Chart above, we want to know when the user clicks on a result to show that specific pony. You can add an event listener to your chart to be notified when the user does so:
     
     function ponySelected(event) {
-        var pony = chart.getSelection()
+         var selection = chart.getSelection()
+        
+        //If you click a pony that was already selected, it deselects it
+        if(selection.length == 0) {
+          document.getElementById("selection").innerHTML = "Select a pony to view stats.";
+          return;
+        }
+        
+        var pony = data[selection[0].row+1];
+        
+        document.getElementById("selection").innerHTML = "You selected " +
+          pony[0] + " with a value of " + pony[1];
     }
     
     function drawChart() {

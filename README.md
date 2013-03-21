@@ -173,7 +173,7 @@ So what about the axis titles, the chart title, or customizing the tooltips? Goo
 
 As you can see from this simple example, there are a lot of options to set! In fact, while there are options available to all charts, you can check out the available options for your specific chart on the documentation page. Check out the [Pie Chart](https://developers.google.com/chart/interactive/docs/gallery/piechart#Configuration_Options) documentation to see what some of the above settings mean.
 
-Add your chart
+Display your chart
 =
 
 Now it's time add your chart to the page and display it for your user. There are two things you need to do,

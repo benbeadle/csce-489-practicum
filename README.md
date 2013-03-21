@@ -185,7 +185,8 @@ Now it's time add your chart to the page and display it for your user. There are
 
 2. Attach the chart to the page. You need to do this in the drawChart method due to the fact that you have to wait for all of the APIs to load as you can see when you loaded your libraries. The method to draw your chart should look something like this:
 
-    var chart; //Make this global so other methods, like the optional one in the next section can use it!
+    //Make this global so other methods, like the optional one in the next section can use it!
+    var chart;
     function drawChart() {
         chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
         chart.draw(arrayTable, options);

@@ -177,12 +177,7 @@ Display your chart
 =
 
 Now it's time add your chart to the page and display it for your user. There are two things you need to do,
-1. Make sure you have a div labeled with an id somewhere on your page, like this:
-
-    <body>
-        <div id="pie_chart" /><!-- You can optionally set style like height/width here -->
-    </body>
-
+1. Make sure you have a div labeled with an id somewhere on your page.
 2. Attach the chart to the page. You need to do this in the drawChart method due to the fact that you have to wait for all of the APIs to load as you can see when you loaded your libraries. The method to draw your chart should look something like this:
 
     var chart;
@@ -190,6 +185,12 @@ Now it's time add your chart to the page and display it for your user. There are
         chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
         chart.draw(arrayTable, options);
     }
+
+    <body>
+        <div id="pie_chart"></div><!-- You can optionally set style like height/width here -->
+    </body>
+
+    
 
 There are many other ways to [draw your chart](https://developers.google.com/chart/interactive/docs/drawing_charts). Each type has advantages and disadvantages, it just depends on how your data is compiled/stored which way might be easiest.
 
